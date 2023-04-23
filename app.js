@@ -62,3 +62,51 @@ app.get("/", function(req, res) {
     }
 });
 
+app.get("/home", function(req, res) {
+    if (req.isAuthenticated()) {
+        User.findById(req.user._id).then(function (user) {
+            wishlist = user.wishlist
+        }).catch(function (err) {
+            console.log(err);
+        })
+        res.render("home");
+    } else {
+        res.redirect("/loginLanding");
+    }
+});
+
+app.get("/profile", function(req, res) {
+    if (req.isAuthenticated()) {
+        res.render("profile", {user: req.user});
+    } else {
+        res.redirect("/loginLanding");
+    }
+});
+
+app.get("/editprofile", function(req, res) {
+    if (req.isAuthenticated()) {
+        res.render("editprofile");
+    } else {
+        res.redirect("/loginLanding");
+    }
+});
+app.get("/editpassword", function(req, res) {
+    if (req.isAuthenticated()) {
+        res.render("editpassword");
+    } else {
+        res.redirect("/loginLanding");
+    }
+});
+app.post("/editpassword", function(req, res) {
+    User.findById(req.user._id).then(function (user) {
+        console.log(req.body.password,req.body.npassword)
+        user.changePassword(req.body.password, req.body.npassword, function (err) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.redirect("/profile")
+            }
+        })
+    })
+})
+
