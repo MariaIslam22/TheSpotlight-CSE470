@@ -23,3 +23,42 @@ mongoose.connect("mongodb+srv://mariaislam7:mariabrintu@cluster0.ssbh3pm.mongodb
 let cart = []
 let wishlist = []
 let total = 0;
+
+
+const userSchema = new mongoose.Schema({
+
+
+    username: String,
+    email: String,
+    password: String,
+    cart: [mongoose.Schema.Types.Mixed],
+    wishlist: [mongoose.Schema.Types.Mixed]
+})
+const orderSchema = new mongoose.Schema({
+    _id: String,
+    fname: String,
+    lname: String,
+    phone: String,
+    email: String,
+    city: String,
+    address_1: String,
+    zip: String,
+    cart: [mongoose.Schema.Types.Mixed]
+})
+userSchema.plugin(passportLocalMongoose, {usernameField: 'email'});
+
+const User = mongoose.model("User", userSchema);
+const Order = mongoose.model("Order", orderSchema);
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
+app.get("/", function(req, res) {
+    if (req.isAuthenticated()) {
+        res.redirect("/home");
+
+    } else {
+        res.render("index");
+    }
+});
+

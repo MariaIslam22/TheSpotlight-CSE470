@@ -1,0 +1,148 @@
+
+
+<%- include('partials/loggedheader'); -%>
+<!-- slider Area Start-->
+<div class="slider-area ">
+    <!-- Mobile Menu -->
+    <div class="single-slider slider-height2 d-flex align-items-center" data-background="img/hero/category.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>Checkout</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="checkout_area section_padding">
+    <div class="container">
+        <div class="cupon_area">
+            <div class="check_title">
+                <h2>
+                    Have a coupon?
+                </h2>
+            </div>
+            <input type="text" placeholder="Enter coupon code" />
+            <a class="tp_btn" href="#">Apply Coupon</a>
+        </div>
+        <div class="billing_details">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3>Billing Details</h3>
+                    <form id="my_form" class="row contact_form"  action="/checkout" method="post" novalidate="novalidate">
+                        <div class="col-md-6 form-group p_star">
+
+                            <input type="text" class="form-control" placeholder="First name" id="first" name="fname" />
+                        </div>
+                        <div class="col-md-5 form-group form-box p_star">
+                            <input type="text" placeholder="Last name" class="form-control" id="last" name="lname" />
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            <input type="text" placeholder="Phone number" class="form-control" id="number" name="number" />
+
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            <input type="text" placeholder="Email Address" class="form-control" id="email" name="email" />
+                        </div>
+
+                        <div class="col-md-12 form-group p_star">
+                            <input type="text" placeholder="Address line 01" class="form-control" id="add1" name="add1" />
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <input type="text" placeholder="Town/City" class="form-control" id="city" name="city" />
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <select class="country_select">
+                                <option value="1">Dhaka</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP" />
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <div class="creat_account">
+                                <h3>Shipping Details</h3>
+                                <input type="checkbox" id="f-option3" name="selector" />
+                                <label for="f-option3">Ship to a different address?</label>
+                            </div>
+                            <textarea class="form-control" name="message" id="message" rows="1"
+                                      placeholder="Order Notes"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-4">
+                    <div class="order_box">
+                        <h2>Your Order</h2>
+                        <ul class="list">
+                            <li>
+                                <a href="/cart">Product
+                                    <span>Total</span>
+                                </a>
+                            </li>
+
+                            <%cart.forEach(function (ele){ %>
+                            <%let ref = "${ele.name}"%>
+                            <li>
+                                <a href=<%=ref%>><%=ele.description%>
+                                    <span class="last"><%=ele.price%>$</span>
+                                </a>
+                            </li>
+                            <%})%>
+
+                        </ul>
+                        <ul class="list list_2">
+                            <li>
+                                <a href="/checkout">Subtotal
+                                    <span><%=total%>$</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">Shipping
+                                    <span>Flat rate: $60</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">Total
+                                    <span><%=total+60%>$</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="payment_item">
+                            <div class="radion_btn">
+                                <input type="radio" id="f-option5" name="selector" />
+                                <label for="f-option5">Banking Card</label>
+                                <div class="check"></div>
+                            </div>
+                            <p>
+                                Please send a check to Store Name, Store Street, Store Town,
+                                Store State / County, Store Postcode.
+                            </p>
+                        </div>
+                        <div class="payment_item active">
+                            <div class="radion_btn">
+                                <input type="radio" id="f-option6" name="selector" />
+                                <label for="f-option6">Bkash</label>
+                                <img src="img/product/single-product/card.jpg" alt="" />
+                                <div class="check"></div>
+                            </div>
+                            <p>
+                                Please send a check to Store Name, Store Street, Store Town,
+                                Store State / County, Store Postcode.
+                            </p>
+                        </div>
+                        <div class="creat_account">
+                            <input type="checkbox" id="f-option4" name="selector" />
+                            <label for="f-option4">I’ve read and accept the </label>
+                            <a href="#">terms & conditions*</a>
+                        </div>
+                        <input type="submit" class="btn_3" form="my_form" value="Proceed to Paypal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('partials/footer'); -%>
