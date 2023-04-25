@@ -110,3 +110,18 @@ app.post("/editpassword", function(req, res) {
     })
 })
 
+app.post("/editprofile", function(req, res) {
+    User.findById(req.user.email).then(function (user) {
+        user.email = req.body.email;
+        user.save().then(function () {
+            res.redirect("/profile");
+        }).catch(function (err) {
+            console.log(err);
+        })
+
+    }).catch(function (err) {
+        console.log(err);
+        res.redirect("/editprofile")
+    })
+
+})
