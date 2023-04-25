@@ -125,3 +125,29 @@ app.post("/editprofile", function(req, res) {
     })
 
 })
+
+app.get("/loginLanding", function(req, res) {
+    res.render("loginLanding");
+})
+app.get("/register", function(req, res) {
+    res.render("register");
+})
+app.get("/registerSuccess", function(req, res) {
+    res.render("registerSuccess");
+})
+
+app.get("/loginSuccess", function(req, res) {
+    res.render("loginSuccess");
+})
+
+app.get("/logout", function(req, res) {
+    req.logout(function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            cart = []
+            res.redirect("/");
+
+        }
+    });
+})
