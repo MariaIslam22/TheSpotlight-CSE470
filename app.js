@@ -151,3 +151,32 @@ app.get("/logout", function(req, res) {
         }
     });
 })
+
+
+app.post("/login", function(req, res) {
+    const user = new User({
+        email: req.body.email,
+        password: req.body.password
+    })
+    req.login(user, function(err) {
+        if (err) {
+            console.log(err);
+            res.redirect("/loginLanding");
+        } else {
+            passport.authenticate("local")(req, res, function() {
+                res.redirect("/home");
+            })
+        }
+    })
+
+})
+app.post("/register", function(req, res) {
+    User.register(new User({username: req.body.username, email: req.body.email}), req.body.password).then(function(user) {
+        passport.authenticate("local")(req, res, function() {
+            res.redirect("/registerSuccess");
+        })
+    }) .catch(function(err) {
+        console.log(err);
+        res.redirect("/register")
+    })
+})
