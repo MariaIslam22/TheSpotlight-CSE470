@@ -180,3 +180,47 @@ app.post("/register", function(req, res) {
         res.redirect("/register")
     })
 })
+
+
+app.get("/product1", function(req, res) {
+    if (req.isAuthenticated()) {
+        res.render("product1");
+    } else {
+        res.redirect("/loginLanding");
+    }
+})
+app.get("/product2", function(req, res) {
+    if (req.isAuthenticated()) {
+        res.render("product2");
+    } else {
+        res.redirect("/loginLanding");
+    }
+})
+app.get("/product3", function(req, res) {
+    if (req.isAuthenticated()) {
+        res.render("product3");
+    } else {
+        res.redirect("/loginLanding");
+    }
+})
+app.get("/product4", function(req, res) {
+    if (req.isAuthenticated()) {
+        res.render("product4");
+    } else {
+        res.redirect("/loginLanding");
+    }
+})
+app.get("/product5", function(req, res) {
+    if (req.isAuthenticated()) {
+        res.render("product5");
+    } else {
+        res.redirect("/loginLanding");
+    }
+})
+app.get("/product6", function(req, res) {
+    if (req.isAuthenticated()) {
+        res.render("product6");
+    } else {
+        res.redirect("/loginLanding");
+    }
+})
