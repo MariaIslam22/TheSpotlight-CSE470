@@ -224,3 +224,54 @@ app.get("/product6", function(req, res) {
         res.redirect("/loginLanding");
     }
 })
+
+app.get("/addtoCart1", function(req, res) {
+    if (req.isAuthenticated()) {
+        cart.push({name: "product1", description: "Comfy Pants", price: 5 });
+        res.redirect("/product1")
+    } else {
+        res.redirect("/loginLanding");
+    }
+
+})
+app.get("/addtoCart2", function(req, res) {
+    if (req.isAuthenticated()) {
+        cart.push({name: "product2", description: "Too Cool Green Sweatshirt", price: 15 });
+        res.redirect("/product2")
+    } else {
+        res.redirect("/loginLanding");
+    }
+})
+app.get("/addtoCart3", function(req, res) {
+    if (req.isAuthenticated()) {
+        cart.push({name: "product3", description: "Yellow Tops", price: 20 });
+        res.redirect("/product3")
+    } else {
+        res.redirect("/loginLanding");
+    }
+})
+app.get("/addtoCart4", function(req, res) {
+    if (req.isAuthenticated()) {
+        cart.push({name: "product4", description: "Grey Sweatshirt", price: 25 });
+        res.redirect("/product4")
+    } else {
+        res.redirect("/loginLanding");
+    }
+})
+
+app.get("/addtoCart5", function(req, res) {
+    if (req.isAuthenticated()) {
+        cart.push({name: "product5", description: "Black Pants", price: 20 });
+        res.redirect("/product5")
+    } else {
+        res.redirect("/loginLanding");
+    }
+})
+app.get("/addtoCart6", function(req, res) {
+    if (req.isAuthenticated()) {
+        cart.push({name: "product6", description: "Jeans Suit", price: 40 });
+        res.redirect("/product6")
+    } else {
+        res.redirect("/loginLanding");
+    }
+})
