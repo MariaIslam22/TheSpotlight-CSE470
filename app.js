@@ -395,3 +395,63 @@ app.get("/women", function(req, res) {
     }
 
 })
+
+app.get("/checkout", function(req, res) {
+    if (req.isAuthenticated()) {
+        res.render("checkout",{cart: cart, total: total});
+    } else {
+        res.redirect("/loginLanding");
+    }
+
+})
+app.post("/checkout", function(req, res) {
+    if (req.isAuthenticated()) {
+        Order.findById(req.user._id).then(function (order) {
+            if(order){
+                cart.forEach(function (item) {
+                    order.cart.push(item);
+                })
+                order.save().then(function () {
+                    cart = []
+                    console.log(order)
+                    res.redirect("/checkout");
+                }).catch(function (err) {
+                    console.log(err);
+                })
+
+            } else {
+                const order = new Order({
+                    _id: req.user._id,
+                    fname: req.user.fname,
+                    lname: req.user.lname,
+                    email: req.user.email,
+                    address_1: req.body.add1,
+                    city: req.body.city,
+                    zip: req.body.zip,
+                    cart: cart
+                })
+                order.save().then(function () {
+                    cart = []
+                    res.redirect("/checkout");
+                    console.log(order)
+                }).catch(function (err) {
+                    console.log(err);
+                })
+            }
+        })
+
+    } else {
+        res.redirect("/loginLanding");
+    }
+
+})
+
+
+
+
+
+
+
+app.listen(3000, function() {
+    console.log("Server started on port 3000");
+});
