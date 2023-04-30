@@ -362,3 +362,36 @@ app.get("/wishlist", function(req, res) {
     })
 
 })
+
+app.get("/contact", function(req, res) {
+    if (req.isAuthenticated()) {
+        res.render("logcontact");
+    } else {
+        res.render("contact");
+    }
+
+})
+app.get("/about", function(req, res) {
+    if (req.isAuthenticated()) {
+        res.render("logabout");
+    } else {
+        res.render("about");
+    }
+
+})
+app.get("/men", function(req, res) {
+    if (req.isAuthenticated()) {
+        res.render("men");
+    } else {
+        res.redirect("/loginLanding");
+    }
+
+})
+app.get("/women", function(req, res) {
+    if (req.isAuthenticated()) {
+        res.render("women");
+    } else {
+        res.redirect("/loginLanding");
+    }
+
+})
