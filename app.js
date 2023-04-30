@@ -326,3 +326,39 @@ app.get("/addtoWish6", function(req, res) {
         res.redirect("/loginLanding");
     }
 })
+
+app.get("/cart", function(req, res) {
+
+
+    cart.forEach(function (item) {
+        total += item.price;
+    })
+    User.findById(req.user._id).then(function (user) {
+        user.cart = cart;
+        user.save().then(function () {
+            res.render("cart", {cart: cart, total: total});
+        }).catch(function (err) {
+            console.log(err);
+        })
+
+    }).catch(function (err) {
+        console.log(err);
+        res.redirect("/")
+    })
+
+})
+app.get("/wishlist", function(req, res) {
+    User.findById(req.user._id).then(function (user) {
+        user.wishlist = wishlist;
+        user.save().then(function () {
+            res.render("wishlist", {wishlist: wishlist});
+        }).catch(function (err) {
+            console.log(err);
+        })
+
+    }).catch(function (err) {
+        console.log(err);
+        res.redirect("/")
+    })
+
+})
